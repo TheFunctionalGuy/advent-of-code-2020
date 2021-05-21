@@ -47,7 +47,7 @@ fn three_numbers(numbers: &Vec<u32>, sum: u32) -> Option<(u32, u32, u32)> {
     None
 }
 
-// Utility function used to convert a given file to a list of u32 valvues
+// Utility function used to convert a given file to a list of u32 values
 fn file_to_vector<R: Read>(io: R) -> Result<Vec<u32>, Error> {
     let buffered_reader = BufReader::new(io);
 
