@@ -1,10 +1,8 @@
 #[macro_use]
 extern crate lazy_static;
 
+use helper::lines_from_file;
 use regex::Regex;
-use std::fs::File;
-use std::io::{BufReader, BufRead};
-use std::path::Path;
 
 fn main() {
     let password_and_policy_list = lines_from_file("src/bin/day_2/day_2.txt");
@@ -75,14 +73,4 @@ fn is_valid_password(password_policy: &PasswordPolicy, password: &String) -> boo
 fn is_valid_password_new_rules(password_policy: &PasswordPolicy, password: &String) -> bool {
     return (password.chars().nth(password_policy.indices.0 as usize - 1).unwrap() == password_policy.letter) ^
         (password.chars().nth(password_policy.indices.1 as usize - 1).unwrap() == password_policy.letter)
-}
-
-// Read file to vector of String
-fn lines_from_file(filename: impl AsRef<Path>) -> Vec<String> {
-    let file = File::open(filename).expect("No such file found.");
-    let buffered_reader = BufReader::new(file);
-
-    buffered_reader.lines()
-        .map(|line| line.expect("Could not parse line"))
-        .collect()
 }
